@@ -3,7 +3,7 @@
  *
  * Форма сброса пароля с использованием 6-значных кодов.
  */
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -60,7 +60,7 @@ export function ResetPasswordForm({
   error,
   isLoading = false,
   className = "",
-}: ResetPasswordFormProps): React.ReactElement {
+}: ResetPasswordFormProps) {
   const [step, setStep] = useState<Step>("request");
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
@@ -72,7 +72,7 @@ export function ResetPasswordForm({
 
   const loading = isLoading || localLoading;
 
-  const handleRequestReset = async (e: React.FormEvent) => {
+  const handleRequestReset = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLocalError(null);
     setMessage(null);

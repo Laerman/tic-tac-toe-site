@@ -3,7 +3,6 @@
  *
  * Компонент отображения данных пользователя после входа.
  */
-import React from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -46,7 +45,7 @@ export function UserProfile({
   onLogout,
   isLoading = false,
   className = "",
-}: UserProfileProps): React.ReactElement {
+}: UserProfileProps) {
   const initials = user.name
     ? user.name
         .split(" ")

@@ -3,7 +3,7 @@
  *
  * Форма регистрации с поддержкой верификации email через 6-значный код.
  */
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -69,7 +69,7 @@ export function RegisterForm({
   error,
   isLoading = false,
   className = "",
-}: RegisterFormProps): React.ReactElement {
+}: RegisterFormProps) {
   const [step, setStep] = useState<Step>("register");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -80,7 +80,7 @@ export function RegisterForm({
   const [message, setMessage] = useState<string | null>(null);
   const [isResending, setIsResending] = useState(false);
 
-  const handleRegister = async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLocalError(null);
 
