@@ -63,12 +63,11 @@ const Index: React.FC = () => {
               <p className="text-sm text-muted-foreground">
                 Войдите или зарегистрируйтесь, чтобы начать игру
               </p>
-              <Button 
-                onClick={() => setShowAuthForm(true)}
-                className="w-full coral-button"
-              >
-                Вход / Регистрация
-              </Button>
+              <Link to="/auth">
+                <Button className="w-full coral-button">
+                  Вход / Регистрация
+                </Button>
+              </Link>
             </div>
           )}
         </div>

@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import InventoryPage from "./pages/InventoryPage";
 import AdminPanel from "./pages/AdminPanel";
+import AuthPage from "./pages/AuthPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Toaster />
       <Routes>
         <Route path="/" element={<Index />} />
+        <Route path="/auth" element={<AuthPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/register" element={<Register />} />
