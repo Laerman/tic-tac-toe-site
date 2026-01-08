@@ -45,37 +45,64 @@ export default function ImportProducts() {
 
       reader.onload = async (e) => {
         const content = e.target?.result as string;
-        let fileContent = content;
+        let products = [];
 
         if (fileType === 'csv') {
-          fileContent = btoa(unescape(encodeURIComponent(content)));
-        }
-
-        const response = await fetch('https://functions.poehali.dev/fdd2f94b-a941-4339-ab97-b129904f06be', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            file_type: fileType,
-            file_content: fileContent
-          })
-        });
-
-        const data = await response.json();
-
-        if (response.ok && data.success) {
-          setResult({ imported: data.imported, total: data.total });
-          toast({
-            title: "Успешно!",
-            description: `Импортировано ${data.imported} из ${data.total} товаров`,
-          });
-          setFile(null);
-          const input = document.getElementById('file-input') as HTMLInputElement;
-          if (input) input.value = '';
+          const lines = content.split('\n');
+          const headers = lines[0].split(',').map(h => h.trim());
+          
+          for (let i = 1; i < lines.length; i++) {
+            if (lines[i].trim()) {
+              const values = lines[i].split(',');
+              const product: any = {};
+              headers.forEach((header, idx) => {
+                product[header] = values[idx]?.trim() || null;
+              });
+              products.push(product);
+            }
+          }
         } else {
-          throw new Error(data.error || 'Ошибка импорта');
+          products = JSON.parse(content);
         }
+
+        if (!Array.isArray(products)) {
+          throw new Error('Файл должен содержать массив товаров');
+        }
+
+        const BATCH_SIZE = 50;
+        let totalImported = 0;
+
+        for (let i = 0; i < products.length; i += BATCH_SIZE) {
+          const batch = products.slice(i, i + BATCH_SIZE);
+          
+          const response = await fetch('https://functions.poehali.dev/fdd2f94b-a941-4339-ab97-b129904f06be', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              file_type: 'json',
+              file_content: JSON.stringify(batch)
+            })
+          });
+
+          const data = await response.json();
+
+          if (response.ok && data.success) {
+            totalImported += data.imported;
+          } else {
+            throw new Error(data.error || 'Ошибка импорта');
+          }
+        }
+
+        setResult({ imported: totalImported, total: products.length });
+        toast({
+          title: "Успешно!",
+          description: `Импортировано ${totalImported} из ${products.length} товаров`,
+        });
+        setFile(null);
+        const input = document.getElementById('file-input') as HTMLInputElement;
+        if (input) input.value = '';
       };
 
       reader.onerror = () => {
