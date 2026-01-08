@@ -108,17 +108,22 @@ def parse_csv(csv_content: str) -> List[Dict[str, Any]]:
 
 def import_products_to_db(products: List[Dict[str, Any]]) -> int:
     '''Импорт продуктов в базу данных'''
+    print(f"Starting import of {len(products)} products")
+    
     dsn = os.environ.get('DATABASE_URL')
     conn = psycopg2.connect(dsn)
     cur = conn.cursor()
     
     imported = 0
+    skipped = 0
     boolean_fields = ['in_stock', 'has_remote', 'is_dimmable', 'has_color_change', 'suspended_ceiling']
     numeric_fields = ['price', 'rating', 'reviews', 'lamp_count', 'lamp_power', 'total_power', 
                      'lighting_area', 'voltage', 'height', 'diameter', 'length', 'width', 
                      'depth', 'chain_length', 'official_warranty', 'shop_warranty']
     
-    for product in products:
+    for idx, product in enumerate(products):
+        print(f"Processing product {idx + 1}: keys={list(product.keys())[:5]}")
+        
         columns = []
         values = []
         placeholders = []
@@ -147,17 +152,26 @@ def import_products_to_db(products: List[Dict[str, Any]]) -> int:
                 values.append(clean_value)
                 placeholders.append('%s')
         
-        if columns and 'name' in [c.strip('"') for c in columns]:
+        has_name = 'name' in [c.strip('"') for c in columns]
+        print(f"Product {idx + 1}: columns={len(columns)}, has_name={has_name}")
+        
+        if columns and has_name:
             query = f"INSERT INTO products ({', '.join(columns)}) VALUES ({', '.join(placeholders)})"
             try:
                 cur.execute(query, values)
                 imported += 1
+                print(f"Product {idx + 1}: imported successfully")
             except Exception as e:
-                print(f"Error inserting product: {e}")
+                print(f"Product {idx + 1}: Error - {e}")
+                skipped += 1
                 continue
+        else:
+            print(f"Product {idx + 1}: skipped - no name field")
+            skipped += 1
     
     conn.commit()
     cur.close()
     conn.close()
     
+    print(f"Import complete: imported={imported}, skipped={skipped}")
     return imported
