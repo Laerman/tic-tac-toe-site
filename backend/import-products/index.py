@@ -120,8 +120,8 @@ def import_products_to_db(products: List[Dict[str, Any]]) -> int:
         placeholders = []
         
         for key, value in product.items():
-            if key != 'id' and key is not None:
-                columns.append(key)
+            if key and key != 'id' and key.strip():
+                columns.append(f'"{key}"')
                 if value == '' or value is None:
                     values.append(None)
                 else:
@@ -130,8 +130,12 @@ def import_products_to_db(products: List[Dict[str, Any]]) -> int:
         
         if columns:
             query = f"INSERT INTO products ({', '.join(columns)}) VALUES ({', '.join(placeholders)})"
-            cur.execute(query, values)
-            imported += 1
+            try:
+                cur.execute(query, values)
+                imported += 1
+            except Exception as e:
+                print(f"Error inserting product: {e}")
+                continue
     
     conn.commit()
     cur.close()
