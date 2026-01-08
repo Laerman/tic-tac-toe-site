@@ -16,6 +16,7 @@ import Profile from "./pages/Profile";
 import InventoryPage from "./pages/InventoryPage";
 import AdminPanel from "./pages/AdminPanel";
 import AuthPage from "./pages/AuthPage";
+import ImportProducts from "./pages/ImportProducts";
 
 function App() {
   return (
@@ -70,6 +71,14 @@ function App() {
           element={
             <ProtectedRoute>
               <InventoryPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/import-products"
+          element={
+            <ProtectedRoute adminRequired>
+              <ImportProducts />
             </ProtectedRoute>
           }
         />
