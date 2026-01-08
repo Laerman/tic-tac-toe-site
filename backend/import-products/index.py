@@ -120,9 +120,12 @@ def import_products_to_db(products: List[Dict[str, Any]]) -> int:
         placeholders = []
         
         for key, value in product.items():
-            if key != 'id':
+            if key != 'id' and key is not None:
                 columns.append(key)
-                values.append(value)
+                if value == '' or value is None:
+                    values.append(None)
+                else:
+                    values.append(value)
                 placeholders.append('%s')
         
         if columns:
