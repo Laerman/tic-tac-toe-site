@@ -120,6 +120,7 @@ def import_products_to_db(products: List[Dict[str, Any]]) -> int:
     numeric_fields = ['price', 'rating', 'reviews', 'lamp_count', 'lamp_power', 'total_power', 
                      'lighting_area', 'voltage', 'height', 'diameter', 'length', 'width', 
                      'depth', 'chain_length', 'official_warranty', 'shop_warranty']
+    skip_fields = ['created_at', 'updated_at']
     
     for idx, product in enumerate(products):
         print(f"Processing product {idx + 1}: keys={list(product.keys())[:5]}")
@@ -129,7 +130,7 @@ def import_products_to_db(products: List[Dict[str, Any]]) -> int:
         placeholders = []
         
         for key, value in product.items():
-            if key and key != 'id' and key.strip():
+            if key and key != 'id' and key.strip() and key not in skip_fields:
                 clean_value = value
                 
                 if value == '' or value is None or value == 'NULL':
@@ -147,6 +148,9 @@ def import_products_to_db(products: List[Dict[str, Any]]) -> int:
                             clean_value = int(value)
                     except (ValueError, TypeError):
                         clean_value = None
+                
+                if key == 'name' and (not clean_value or clean_value == 'NULL'):
+                    clean_value = 'Товар без названия'
                 
                 columns.append(f'"{key}"')
                 values.append(clean_value)
