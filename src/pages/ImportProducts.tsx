@@ -60,15 +60,27 @@ export default function ImportProducts() {
 
         if (fileType === 'csv') {
           const lines = content.split('\n');
-          const headers = lines[0].split(',').map(h => h.trim());
-          addLog(`Найдено столбцов: ${headers.length}`);
+          const firstLine = lines[0];
+          
+          let delimiter = ',';
+          if (firstLine.includes(';')) {
+            delimiter = ';';
+          } else if (firstLine.includes('\t')) {
+            delimiter = '\t';
+          }
+          
+          addLog(`Определен разделитель: "${delimiter === '\t' ? '\\t' : delimiter}"`);
+          
+          const headers = firstLine.split(delimiter).map(h => h.trim().replace(/^["']|["']$/g, ''));
+          addLog(`Найдено столбцов: ${headers.length} (${headers.slice(0, 5).join(', ')}...)`);
           
           for (let i = 1; i < lines.length; i++) {
             if (lines[i].trim()) {
-              const values = lines[i].split(',');
+              const values = lines[i].split(delimiter);
               const product: any = {};
               headers.forEach((header, idx) => {
-                product[header] = values[idx]?.trim() || null;
+                const value = values[idx]?.trim().replace(/^["']|["']$/g, '');
+                product[header] = value || null;
               });
               products.push(product);
             }
