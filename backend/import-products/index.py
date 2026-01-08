@@ -120,6 +120,7 @@ def import_products_to_db(products: List[Dict[str, Any]]) -> int:
     numeric_fields = ['price', 'rating', 'reviews', 'lamp_count', 'lamp_power', 'total_power', 
                      'lighting_area', 'voltage', 'height', 'diameter', 'length', 'width', 
                      'depth', 'chain_length', 'official_warranty', 'shop_warranty']
+    array_fields = ['images', 'materials']
     skip_fields = ['created_at', 'updated_at']
     
     for idx, product in enumerate(products):
@@ -133,8 +134,18 @@ def import_products_to_db(products: List[Dict[str, Any]]) -> int:
             if key and key != 'id' and key.strip() and key not in skip_fields:
                 clean_value = value
                 
-                if value == '' or value is None or value == 'NULL':
+                if value == '' or value is None or value == 'NULL' or value == '[]':
                     clean_value = None
+                elif key in array_fields:
+                    if isinstance(value, str):
+                        if value.startswith('[') and value.endswith(']'):
+                            clean_value = None
+                        else:
+                            clean_value = [v.strip() for v in value.split(',') if v.strip()]
+                    elif isinstance(value, list):
+                        clean_value = value if value else None
+                    else:
+                        clean_value = None
                 elif key in boolean_fields:
                     if isinstance(value, str):
                         clean_value = value.lower() in ['true', '1', 'yes', 'да', 'истина']
