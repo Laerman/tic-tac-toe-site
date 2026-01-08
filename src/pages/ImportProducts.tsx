@@ -8,7 +8,13 @@ export default function ImportProducts() {
   const [file, setFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<{ imported: number; total: number } | null>(null);
+  const [logs, setLogs] = useState<string[]>([]);
   const { toast } = useToast();
+
+  const addLog = (message: string) => {
+    const timestamp = new Date().toLocaleTimeString('ru-RU');
+    setLogs(prev => [...prev, `[${timestamp}] ${message}`]);
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -17,6 +23,7 @@ export default function ImportProducts() {
       if (fileType.endsWith('.json') || fileType.endsWith('.csv')) {
         setFile(selectedFile);
         setResult(null);
+        setLogs([]);
       } else {
         toast({
           title: "Неверный формат",
@@ -38,6 +45,8 @@ export default function ImportProducts() {
     }
 
     setIsLoading(true);
+    setLogs([]);
+    addLog(`Начало импорта файла: ${file.name}`);
 
     try {
       const fileType = file.name.toLowerCase().endsWith('.csv') ? 'csv' : 'json';
@@ -47,9 +56,12 @@ export default function ImportProducts() {
         const content = e.target?.result as string;
         let products = [];
 
+        addLog('Чтение файла...');
+
         if (fileType === 'csv') {
           const lines = content.split('\n');
           const headers = lines[0].split(',').map(h => h.trim());
+          addLog(`Найдено столбцов: ${headers.length}`);
           
           for (let i = 1; i < lines.length; i++) {
             if (lines[i].trim()) {
@@ -61,8 +73,10 @@ export default function ImportProducts() {
               products.push(product);
             }
           }
+          addLog(`Распарсено ${products.length} товаров из CSV`);
         } else {
           products = JSON.parse(content);
+          addLog(`Распарсено ${products.length} товаров из JSON`);
         }
 
         if (!Array.isArray(products)) {
@@ -71,9 +85,14 @@ export default function ImportProducts() {
 
         const BATCH_SIZE = 50;
         let totalImported = 0;
+        const totalBatches = Math.ceil(products.length / BATCH_SIZE);
+        addLog(`Начинаем импорт порциями по ${BATCH_SIZE} товаров (всего порций: ${totalBatches})`);
 
         for (let i = 0; i < products.length; i += BATCH_SIZE) {
           const batch = products.slice(i, i + BATCH_SIZE);
+          const batchNumber = Math.floor(i / BATCH_SIZE) + 1;
+          
+          addLog(`Отправка порции ${batchNumber}/${totalBatches} (товары ${i + 1}-${Math.min(i + BATCH_SIZE, products.length)})`);
           
           const response = await fetch('https://functions.poehali.dev/fdd2f94b-a941-4339-ab97-b129904f06be', {
             method: 'POST',
@@ -90,11 +109,14 @@ export default function ImportProducts() {
 
           if (response.ok && data.success) {
             totalImported += data.imported;
+            addLog(`✓ Порция ${batchNumber}/${totalBatches} импортирована (${data.imported} товаров)`);
           } else {
+            addLog(`✗ Ошибка в порции ${batchNumber}: ${data.error}`);
             throw new Error(data.error || 'Ошибка импорта');
           }
         }
 
+        addLog(`Импорт завершен! Всего импортировано: ${totalImported}/${products.length}`);
         setResult({ imported: totalImported, total: products.length });
         toast({
           title: "Успешно!",
@@ -106,14 +128,17 @@ export default function ImportProducts() {
       };
 
       reader.onerror = () => {
+        addLog('✗ Ошибка чтения файла');
         throw new Error('Ошибка чтения файла');
       };
 
       reader.readAsText(file);
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Неизвестная ошибка';
+      addLog(`✗ ОШИБКА: ${errorMessage}`);
       toast({
         title: "Ошибка импорта",
-        description: error instanceof Error ? error.message : 'Неизвестная ошибка',
+        description: errorMessage,
         variant: "destructive"
       });
     } finally {
@@ -201,6 +226,26 @@ export default function ImportProducts() {
                 )}
               </Button>
             </div>
+
+            {logs.length > 0 && (
+              <Card className="bg-slate-950 border-slate-800">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm font-mono text-green-400 flex items-center gap-2">
+                    <Icon name="Terminal" size={16} />
+                    Логи импорта
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <div className="bg-slate-900 rounded-md p-3 max-h-64 overflow-y-auto font-mono text-xs text-green-300">
+                    {logs.map((log, index) => (
+                      <div key={index} className="mb-1">
+                        {log}
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
 
             {result && (
               <Card className="bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800">
