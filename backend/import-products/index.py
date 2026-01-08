@@ -113,6 +113,10 @@ def import_products_to_db(products: List[Dict[str, Any]]) -> int:
     cur = conn.cursor()
     
     imported = 0
+    boolean_fields = ['in_stock', 'has_remote', 'is_dimmable', 'has_color_change', 'suspended_ceiling']
+    numeric_fields = ['price', 'rating', 'reviews', 'lamp_count', 'lamp_power', 'total_power', 
+                     'lighting_area', 'voltage', 'height', 'diameter', 'length', 'width', 
+                     'depth', 'chain_length', 'official_warranty', 'shop_warranty']
     
     for product in products:
         columns = []
@@ -121,14 +125,29 @@ def import_products_to_db(products: List[Dict[str, Any]]) -> int:
         
         for key, value in product.items():
             if key and key != 'id' and key.strip():
+                clean_value = value
+                
+                if value == '' or value is None or value == 'NULL':
+                    clean_value = None
+                elif key in boolean_fields:
+                    if isinstance(value, str):
+                        clean_value = value.lower() in ['true', '1', 'yes', 'да', 'истина']
+                    else:
+                        clean_value = bool(value)
+                elif key in numeric_fields:
+                    try:
+                        if '.' in str(value):
+                            clean_value = float(value)
+                        else:
+                            clean_value = int(value)
+                    except (ValueError, TypeError):
+                        clean_value = None
+                
                 columns.append(f'"{key}"')
-                if value == '' or value is None:
-                    values.append(None)
-                else:
-                    values.append(value)
+                values.append(clean_value)
                 placeholders.append('%s')
         
-        if columns:
+        if columns and 'name' in [c.strip('"') for c in columns]:
             query = f"INSERT INTO products ({', '.join(columns)}) VALUES ({', '.join(placeholders)})"
             try:
                 cur.execute(query, values)
