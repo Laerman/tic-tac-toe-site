@@ -109,10 +109,10 @@ export default function ImportProducts() {
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-4">
-              <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-8 text-center hover:border-muted-foreground/50 transition-colors">
-                <Icon name="FileUp" size={48} className="mx-auto mb-4 text-muted-foreground" />
-                <label htmlFor="file-input" className="cursor-pointer">
-                  <span className="text-sm text-muted-foreground">
+              <label htmlFor="file-input" className="block cursor-pointer">
+                <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-8 text-center hover:border-muted-foreground/50 transition-colors">
+                  <Icon name="FileUp" size={48} className="mx-auto mb-4 text-muted-foreground" />
+                  <span className="text-sm text-muted-foreground block">
                     Нажмите для выбора файла или перетащите его сюда
                   </span>
                   <input
@@ -122,25 +122,26 @@ export default function ImportProducts() {
                     onChange={handleFileChange}
                     className="hidden"
                   />
-                </label>
-                {file && (
-                  <div className="mt-4 flex items-center justify-center gap-2 text-sm">
-                    <Icon name="File" size={16} />
-                    <span className="font-medium">{file.name}</span>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => {
-                        setFile(null);
-                        const input = document.getElementById('file-input') as HTMLInputElement;
-                        if (input) input.value = '';
-                      }}
-                    >
-                      <Icon name="X" size={16} />
-                    </Button>
-                  </div>
-                )}
-              </div>
+                  {file && (
+                    <div className="mt-4 flex items-center justify-center gap-2 text-sm">
+                      <Icon name="File" size={16} />
+                      <span className="font-medium">{file.name}</span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setFile(null);
+                          const input = document.getElementById('file-input') as HTMLInputElement;
+                          if (input) input.value = '';
+                        }}
+                      >
+                        <Icon name="X" size={16} />
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </label>
 
               <div className="bg-muted/50 rounded-lg p-4 space-y-2">
                 <h3 className="font-semibold text-sm flex items-center gap-2">
