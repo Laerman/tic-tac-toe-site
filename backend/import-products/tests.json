@@ -1,0 +1,31 @@
+{
+  "tests": [
+    {
+      "name": "Import JSON products",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "file_type": "json",
+        "file_content": "[{\"name\":\"Test Lamp\",\"price\":1000,\"brand\":\"TestBrand\",\"in_stock\":true}]"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "imported": 1,
+        "total": 1
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Reject invalid file_type",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "file_type": "xml",
+        "file_content": "test"
+      },
+      "expectedStatus": 400,
+      "bodyMatcher": "partial"
+    }
+  ]
+}
