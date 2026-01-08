@@ -29,6 +29,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/import-products" element={<ImportProducts />} />
         
         {/* Редирект с /game на /tic-tac-toe */}
         <Route path="/game" element={<Navigate to="/tic-tac-toe" replace />} />
@@ -71,14 +72,6 @@ function App() {
           element={
             <ProtectedRoute>
               <InventoryPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/import-products"
-          element={
-            <ProtectedRoute adminRequired>
-              <ImportProducts />
             </ProtectedRoute>
           }
         />
