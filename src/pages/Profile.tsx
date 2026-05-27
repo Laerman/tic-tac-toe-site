@@ -39,7 +39,7 @@ const Profile: React.FC = () => {
           </Avatar>
           <div>
             <h1 className="text-2xl font-bold">{user.username}</h1>
-            <p className="text-gray-500">{user.email}</p>
+            <p className="text-muted-foreground">{user.email}</p>
             <div className="mt-1">
               <Badge variant="outline">{user.role === "admin" ? "Администратор" : "Игрок"}</Badge>
             </div>
@@ -99,17 +99,17 @@ const Profile: React.FC = () => {
                       </div>
                     </div>
                     <div className="flex items-center">
-                      <Badge className="mr-2 bg-gray-200 text-gray-500">🏆</Badge>
+                      <Badge className="mr-2 bg-purple-900/50 text-purple-300">🏆</Badge>
                       <div>
-                        <div className="font-medium text-gray-500">Мастер игры</div>
-                        <div className="text-sm text-gray-500">Выиграйте 10 игр подряд</div>
+                        <div className="font-medium text-muted-foreground">Мастер игры</div>
+                        <div className="text-sm text-muted-foreground">Выиграйте 10 игр подряд</div>
                       </div>
                     </div>
                     <div className="flex items-center">
-                      <Badge className="mr-2 bg-gray-200 text-gray-500">⚡</Badge>
+                      <Badge className="mr-2 bg-purple-900/50 text-purple-300">⚡</Badge>
                       <div>
-                        <div className="font-medium text-gray-500">Молниеносный</div>
-                        <div className="text-sm text-gray-500">Выиграйте игру за менее чем 15 секунд</div>
+                        <div className="font-medium text-muted-foreground">Молниеносный</div>
+                        <div className="text-sm text-muted-foreground">Выиграйте игру за менее чем 15 секунд</div>
                       </div>
                     </div>
                   </div>

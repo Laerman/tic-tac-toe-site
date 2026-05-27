@@ -187,18 +187,18 @@ const SimpleAuthForm: React.FC<SimpleAuthFormProps> = ({ onSuccess }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-ocean-50 to-coral-50 dark:from-ocean-950 dark:to-coral-950 p-4">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold flex items-center justify-center">
-            <Database className="mr-2 h-6 w-6 text-blue-600" />
+            <Database className="mr-2 h-6 w-6 text-ocean-400" />
             Добро пожаловать
           </CardTitle>
           <CardDescription>
             Войдите в аккаунт или создайте новый
           </CardDescription>
-          <div className="mt-2 p-3 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-md">
-            <p className="text-xs text-blue-700 dark:text-blue-300 text-center">
+          <div className="mt-2 p-3 bg-ocean-900/40 border border-ocean-700/50 rounded-md">
+            <p className="text-xs text-ocean-300 text-center">
               <strong>🗃️ Данные сохраняются в PostgreSQL</strong><br />
               Тестовый аккаунт: test / test123<br />
               При регистрации создается SQL миграция
@@ -214,8 +214,8 @@ const SimpleAuthForm: React.FC<SimpleAuthFormProps> = ({ onSuccess }) => {
           )}
 
           {success && (
-            <Alert className="mb-4 bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800">
-              <AlertDescription className="text-green-700 dark:text-green-300">
+            <Alert className="mb-4 bg-green-900/40 border-green-700/50">
+              <AlertDescription className="text-green-300">
                 {success}
               </AlertDescription>
             </Alert>

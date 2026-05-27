@@ -85,7 +85,7 @@ const GameRoom: React.FC = () => {
                 Создана {formatDistanceToNow(currentRoom.createdAt, { addSuffix: true, locale: ru })}
               </CardDescription>
             </div>
-            <div className="flex items-center gap-2 bg-ocean-50/70 dark:bg-ocean-800/70 p-2 rounded">
+            <div className="flex items-center gap-2 bg-purple-900/50 p-2 rounded border border-purple-700/40">
               <span className="text-sm font-medium">Код: {currentRoom.roomCode}</span>
               <Button variant="ghost" size="icon" onClick={copyRoomCode} className="h-6 w-6">
                 <Copy className="h-3 w-3" />
@@ -96,7 +96,7 @@ const GameRoom: React.FC = () => {
         
         <CardContent className="pb-4">
           {isSpectating && (
-            <div className="bg-amber-50/70 dark:bg-amber-900/70 p-2 rounded mb-4 text-sm">
+            <div className="bg-amber-900/40 border border-amber-700/40 p-2 rounded mb-4 text-sm text-amber-300">
               <p className="font-medium">Режим наблюдения (только для администраторов)</p>
             </div>
           )}
@@ -105,7 +105,7 @@ const GameRoom: React.FC = () => {
             <div>
               {currentRoom.players[0] && (
                 <div className="flex items-center">
-                  <div className="w-8 h-8 flex items-center justify-center rounded-full bg-ocean-200 dark:bg-ocean-700 text-ocean-700 dark:text-ocean-200 mr-2">
+                  <div className="w-8 h-8 flex items-center justify-center rounded-full bg-ocean-700 text-ocean-200 mr-2">
                     {currentRoom.players[0].symbol}
                   </div>
                   <div>
@@ -141,7 +141,7 @@ const GameRoom: React.FC = () => {
                       )}
                     </div>
                   </div>
-                  <div className="w-8 h-8 flex items-center justify-center rounded-full bg-ocean-200 dark:bg-ocean-700 text-ocean-700 dark:text-ocean-200 ml-2">
+                  <div className="w-8 h-8 flex items-center justify-center rounded-full bg-ocean-700 text-ocean-200 ml-2">
                     {currentRoom.players[1].symbol}
                   </div>
                 </div>
@@ -149,7 +149,7 @@ const GameRoom: React.FC = () => {
                 <div className="flex items-center justify-end">
                   <div>
                     <p className="text-sm text-muted-foreground">Ожидание второго игрока...</p>
-                    <span className="text-xs bg-yellow-100/70 text-yellow-800 dark:bg-yellow-900/70 dark:text-yellow-200 px-2 py-0.5 rounded-full">
+                    <span className="text-xs bg-yellow-900/50 text-yellow-300 px-2 py-0.5 rounded-full border border-yellow-700/40">
                       Бот подключится через 1 минуту
                     </span>
                   </div>

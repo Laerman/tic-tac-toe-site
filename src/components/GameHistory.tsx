@@ -199,11 +199,11 @@ const GameHistory: React.FC<GameHistoryProps> = ({ userId, limit = 20 }) => {
 
   const getBetStatusColor = (status: string) => {
     switch (status) {
-      case 'won': return 'bg-green-100 text-green-800 border-green-200';
-      case 'lost': return 'bg-red-100 text-red-800 border-red-200';
-      case 'active': return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'returned': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+      case 'won': return 'bg-green-900/50 text-green-300 border-green-700';
+      case 'lost': return 'bg-red-900/50 text-red-300 border-red-700';
+      case 'active': return 'bg-blue-900/50 text-blue-300 border-blue-700';
+      case 'returned': return 'bg-yellow-900/50 text-yellow-300 border-yellow-700';
+      default: return 'bg-muted text-muted-foreground border-border';
     }
   };
 
@@ -231,8 +231,8 @@ const GameHistory: React.FC<GameHistoryProps> = ({ userId, limit = 20 }) => {
       <Card>
         <CardContent className="pt-6">
           <div className="flex items-center justify-center py-8">
-            <Icon name="Loader2" size={24} className="animate-spin text-gray-500" />
-            <span className="ml-2 text-gray-500">Загрузка истории игр...</span>
+            <Icon name="Loader2" size={24} className="animate-spin text-muted-foreground" />
+            <span className="ml-2 text-muted-foreground">Загрузка истории игр...</span>
           </div>
         </CardContent>
       </Card>
@@ -274,8 +274,8 @@ const GameHistory: React.FC<GameHistoryProps> = ({ userId, limit = 20 }) => {
       <CardContent>
         {games.length === 0 ? (
           <div className="text-center py-8">
-            <Icon name="GamepadIcon" size={48} className="text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-500">Игры не найдены</p>
+            <Icon name="GamepadIcon" size={48} className="text-muted-foreground mx-auto mb-4" />
+            <p className="text-muted-foreground">Игры не найдены</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -289,7 +289,7 @@ const GameHistory: React.FC<GameHistoryProps> = ({ userId, limit = 20 }) => {
                         <h3 className="font-semibold text-lg">
                           {formatGameType(game.game_type)}
                         </h3>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-muted-foreground">
                           {formatDate(game.started_at)}
                           {game.finished_at && ` - ${formatDate(game.finished_at)}`}
                         </p>

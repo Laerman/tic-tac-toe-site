@@ -22,12 +22,12 @@ const InventorySlot: React.FC<InventorySlotProps> = ({
 }) => {
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
-      case 'common': return 'bg-gray-200 border-gray-400';
-      case 'uncommon': return 'bg-green-100 border-green-400';
-      case 'rare': return 'bg-blue-100 border-blue-400';
-      case 'epic': return 'bg-purple-100 border-purple-400';
-      case 'legendary': return 'bg-amber-100 border-amber-500';
-      default: return 'bg-gray-200 border-gray-400';
+      case 'common': return 'bg-muted border-muted-foreground/30';
+      case 'uncommon': return 'bg-green-900/40 border-green-600';
+      case 'rare': return 'bg-blue-900/40 border-blue-600';
+      case 'epic': return 'bg-purple-900/40 border-purple-600';
+      case 'legendary': return 'bg-amber-900/40 border-amber-600';
+      default: return 'bg-muted border-muted-foreground/30';
     }
   };
 
@@ -65,7 +65,7 @@ const InventorySlot: React.FC<InventorySlotProps> = ({
                 {inventoryItem.equipped && (
                   <Badge 
                     variant="outline" 
-                    className="absolute top-0 left-0 text-xs px-1 bg-blue-100"
+                    className="absolute top-0 left-0 text-xs px-1 bg-blue-900/60 text-blue-300 border-blue-700"
                   >
                     Э
                   </Badge>
@@ -87,7 +87,7 @@ const InventorySlot: React.FC<InventorySlotProps> = ({
                   </p>
                 </div>
                 {inventoryItem.equipped && (
-                  <Badge variant="outline" className="bg-blue-100">Экипировано</Badge>
+                  <Badge variant="outline" className="bg-blue-900/60 text-blue-300 border-blue-700">Экипировано</Badge>
                 )}
               </div>
               <p className="text-sm">{inventoryItem.item.description}</p>

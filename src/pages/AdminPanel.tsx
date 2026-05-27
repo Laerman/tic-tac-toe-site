@@ -202,28 +202,28 @@ const AdminPanel: React.FC = () => {
   }, [error, success]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen p-4">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-foreground mb-2">
             <Settings className="inline-block mr-2" />
             Административная панель
           </h1>
-          <p className="text-gray-600">Управление пользователями и базой данных</p>
+          <p className="text-muted-foreground">Управление пользователями и базой данных</p>
         </div>
 
         {/* Сообщения */}
         {error && (
-          <Alert className="mb-4 border-red-200 bg-red-50">
-            <XCircle className="h-4 w-4 text-red-500" />
-            <AlertDescription className="text-red-700">{error}</AlertDescription>
+          <Alert className="mb-4 border-red-800 bg-red-950/50">
+            <XCircle className="h-4 w-4 text-red-400" />
+            <AlertDescription className="text-red-300">{error}</AlertDescription>
           </Alert>
         )}
 
         {success && (
-          <Alert className="mb-4 border-green-200 bg-green-50">
-            <CheckCircle className="h-4 w-4 text-green-500" />
-            <AlertDescription className="text-green-700">{success}</AlertDescription>
+          <Alert className="mb-4 border-green-800 bg-green-950/50">
+            <CheckCircle className="h-4 w-4 text-green-400" />
+            <AlertDescription className="text-green-300">{success}</AlertDescription>
           </Alert>
         )}
 

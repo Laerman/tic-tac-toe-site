@@ -52,12 +52,12 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, onLogout }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <div className="max-w-2xl w-full space-y-6">
         
         {/* Заголовок */}
         <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-ocean-400 to-coral-400 bg-clip-text text-transparent">
             Добро пожаловать!
           </h1>
           <p className="text-muted-foreground">
@@ -66,18 +66,18 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, onLogout }) => {
         </div>
 
         {/* Карточка профиля */}
-        <Card className="shadow-lg border-0 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm">
+        <Card className="shadow-lg border border-purple-800/50 bg-purple-950/60 backdrop-blur-sm">
           <CardHeader className="text-center pb-4">
             <div className="flex flex-col items-center space-y-4">
-              <Avatar className="h-20 w-20 border-4 border-white shadow-lg">
-                <AvatarFallback className="text-xl font-bold bg-gradient-to-br from-blue-500 to-purple-500 text-white">
+              <Avatar className="h-20 w-20 border-4 border-purple-600 shadow-lg">
+                <AvatarFallback className="text-xl font-bold bg-gradient-to-br from-ocean-500 to-coral-500 text-white">
                   {getInitials(user.login)}
                 </AvatarFallback>
               </Avatar>
               <div>
                 <CardTitle className="text-2xl">{user.login}</CardTitle>
                 <div className="flex items-center justify-center gap-2 mt-2">
-                  <Badge variant="secondary" className="bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300">
+                  <Badge variant="secondary" className="bg-green-900/50 text-green-300 border-green-700">
                     <Icon name="CheckCircle" size={14} className="mr-1" />
                     Активный пользователь
                   </Badge>
@@ -98,7 +98,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, onLogout }) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <p className="text-sm text-muted-foreground">ID пользователя</p>
-                  <p className="font-mono text-sm bg-gray-100 dark:bg-gray-700 px-3 py-2 rounded">
+                  <p className="font-mono text-sm bg-purple-900/50 px-3 py-2 rounded border border-purple-700/50">
                     #{user.id}
                   </p>
                 </div>
@@ -190,15 +190,15 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, onLogout }) => {
         <GameHistory userId={user.id} limit={10} />
 
         {/* Информационное сообщение */}
-        <Card className="bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
+        <Card className="bg-ocean-900/30 border-ocean-700/50">
           <CardContent className="pt-6">
             <div className="flex items-start gap-3">
-              <Icon name="Info" size={20} className="text-blue-600 mt-0.5" />
+              <Icon name="Info" size={20} className="text-ocean-400 mt-0.5" />
               <div className="space-y-1">
-                <p className="text-blue-800 dark:text-blue-200 font-medium">
+                <p className="text-ocean-200 font-medium">
                   🎉 Вы успешно вошли в систему!
                 </p>
-                <p className="text-blue-600 dark:text-blue-300 text-sm">
+                <p className="text-ocean-300 text-sm">
                   Ваши данные надежно сохранены в PostgreSQL базе данных. 
                   В будущем здесь появятся дополнительные функции управления профилем.
                 </p>

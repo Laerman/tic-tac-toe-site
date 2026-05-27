@@ -104,7 +104,7 @@ const Admin: React.FC = () => {
         </div>
       </div>
       
-      <div className="bg-white dark:bg-slate-950 rounded-lg border shadow-sm mb-6">
+      <div className="bg-purple-950/60 rounded-lg border border-purple-800/50 shadow-sm mb-6">
         <Table>
           <TableHeader>
             <TableRow>

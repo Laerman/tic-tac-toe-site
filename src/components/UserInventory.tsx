@@ -114,12 +114,12 @@ const UserInventory: React.FC<UserInventoryProps> = ({ userId }) => {
 
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
-      case 'common': return 'bg-gray-100 text-gray-700 border-gray-300';
-      case 'uncommon': return 'bg-green-100 text-green-700 border-green-300';
-      case 'rare': return 'bg-blue-100 text-blue-700 border-blue-300';
-      case 'epic': return 'bg-purple-100 text-purple-700 border-purple-300';
-      case 'legendary': return 'bg-yellow-100 text-yellow-700 border-yellow-300';
-      default: return 'bg-gray-100 text-gray-700 border-gray-300';
+      case 'common': return 'bg-muted text-muted-foreground border-border';
+      case 'uncommon': return 'bg-green-900/50 text-green-300 border-green-700';
+      case 'rare': return 'bg-blue-900/50 text-blue-300 border-blue-700';
+      case 'epic': return 'bg-purple-900/50 text-purple-300 border-purple-700';
+      case 'legendary': return 'bg-amber-900/50 text-amber-300 border-amber-700';
+      default: return 'bg-muted text-muted-foreground border-border';
     }
   };
 
@@ -224,8 +224,8 @@ const UserInventory: React.FC<UserInventoryProps> = ({ userId }) => {
       <CardContent className="space-y-6">
         {Object.keys(groupedItems).length === 0 ? (
           <div className="text-center py-8">
-            <Icon name="Package" size={48} className="mx-auto mb-4 text-gray-400" />
-            <p className="text-gray-500">Инвентарь пуст</p>
+            <Icon name="Package" size={48} className="mx-auto mb-4 text-muted-foreground" />
+            <p className="text-muted-foreground">Инвентарь пуст</p>
           </div>
         ) : (
           Object.entries(groupedItems).map(([type, items]) => (
@@ -247,7 +247,7 @@ const UserInventory: React.FC<UserInventoryProps> = ({ userId }) => {
                         <span className="text-2xl">{item.icon}</span>
                         <div>
                           <h4 className="font-medium text-sm">{item.name}</h4>
-                          <p className="text-xs text-gray-500 line-clamp-2">{item.description}</p>
+                          <p className="text-xs text-muted-foreground line-clamp-2">{item.description}</p>
                         </div>
                       </div>
                       {item.equipped && (

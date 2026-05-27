@@ -28,21 +28,21 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="border-b border-ocean-200 dark:border-ocean-700 backdrop-blur-sm bg-white/40 dark:bg-ocean-900/40">
+    <header className="border-b border-ocean-800/50 backdrop-blur-sm bg-purple-950/60">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center gap-2">
             <UnderwaterIcon emoji="🐋" className="text-2xl" delay={0.5} />
-            <span className="text-xl font-bold text-ocean-700 dark:text-ocean-100">SVOIKIT</span>
+            <span className="text-xl font-bold text-ocean-300">SVOIKIT</span>
             <span className="text-sm text-muted-foreground hidden sm:inline-block">свой кит - твои игры</span>
           </Link>
           <nav className="flex items-center gap-4">
-            <Link to="/" className="text-sm font-medium text-ocean-600 dark:text-ocean-200 hover:text-ocean-800 dark:hover:text-ocean-50 transition-colors">
+            <Link to="/" className="text-sm font-medium text-ocean-300 hover:text-white transition-colors">
               Главная
             </Link>
             {isAuthenticated && (
               <>
-                <Link to="/tic-tac-toe" className="text-sm font-medium text-ocean-600 dark:text-ocean-200 hover:text-ocean-800 dark:hover:text-ocean-50 transition-colors flex items-center">
+                <Link to="/tic-tac-toe" className="text-sm font-medium text-ocean-300 hover:text-white transition-colors flex items-center">
                   <UnderwaterIcon emoji="🎮" className="text-sm mr-1" delay={1} />
                   Играть
                 </Link>
@@ -55,7 +55,7 @@ const Header: React.FC = () => {
           {isAuthenticated ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-8 w-8 rounded-full bg-ocean-100 dark:bg-ocean-700 hover:bg-ocean-200 dark:hover:bg-ocean-600">
+                <Button variant="ghost" className="relative h-8 w-8 rounded-full bg-purple-800 hover:bg-purple-700">
                   <Avatar className="h-8 w-8">
                     <AvatarFallback className="bg-ocean-500 text-white">{user ? getInitials(user.username) : "U"}</AvatarFallback>
                   </Avatar>
@@ -84,7 +84,7 @@ const Header: React.FC = () => {
           ) : (
             <>
               <Link to="/login">
-                <Button variant="outline" size="sm" className="bg-white/50 dark:bg-ocean-700/50 backdrop-blur-sm hover:bg-white/70 dark:hover:bg-ocean-600/70">
+                <Button variant="outline" size="sm" className="border-purple-600 text-ocean-200 hover:bg-purple-800/50 bg-transparent backdrop-blur-sm">
                   Войти
                 </Button>
               </Link>

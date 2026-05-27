@@ -54,11 +54,11 @@ const CharacterEquipment: React.FC<CharacterEquipmentProps> = ({ onItemSelect })
                   <Badge 
                     variant="outline" 
                     className={`text-xs mt-1 ${
-                      equippedWeapon.item.rarity === 'rare' ? 'bg-blue-100 text-blue-800' :
-                      equippedWeapon.item.rarity === 'epic' ? 'bg-purple-100 text-purple-800' :
-                      equippedWeapon.item.rarity === 'legendary' ? 'bg-amber-100 text-amber-800' :
-                      equippedWeapon.item.rarity === 'uncommon' ? 'bg-green-100 text-green-800' :
-                      'bg-gray-100 text-gray-800'
+                      equippedWeapon.item.rarity === 'rare' ? 'bg-blue-900/50 text-blue-300 border-blue-700' :
+                      equippedWeapon.item.rarity === 'epic' ? 'bg-purple-900/50 text-purple-300 border-purple-700' :
+                      equippedWeapon.item.rarity === 'legendary' ? 'bg-amber-900/50 text-amber-300 border-amber-700' :
+                      equippedWeapon.item.rarity === 'uncommon' ? 'bg-green-900/50 text-green-300 border-green-700' :
+                      'bg-muted text-muted-foreground'
                     }`}
                   >
                     {equippedWeapon.item.rarity === 'common' ? 'Обычное' : 
@@ -97,11 +97,11 @@ const CharacterEquipment: React.FC<CharacterEquipmentProps> = ({ onItemSelect })
                   <Badge 
                     variant="outline" 
                     className={`text-xs mt-1 ${
-                      equippedArmor.item.rarity === 'rare' ? 'bg-blue-100 text-blue-800' :
-                      equippedArmor.item.rarity === 'epic' ? 'bg-purple-100 text-purple-800' :
-                      equippedArmor.item.rarity === 'legendary' ? 'bg-amber-100 text-amber-800' :
-                      equippedArmor.item.rarity === 'uncommon' ? 'bg-green-100 text-green-800' :
-                      'bg-gray-100 text-gray-800'
+                      equippedArmor.item.rarity === 'rare' ? 'bg-blue-900/50 text-blue-300 border-blue-700' :
+                      equippedArmor.item.rarity === 'epic' ? 'bg-purple-900/50 text-purple-300 border-purple-700' :
+                      equippedArmor.item.rarity === 'legendary' ? 'bg-amber-900/50 text-amber-300 border-amber-700' :
+                      equippedArmor.item.rarity === 'uncommon' ? 'bg-green-900/50 text-green-300 border-green-700' :
+                      'bg-muted text-muted-foreground'
                     }`}
                   >
                     {equippedArmor.item.rarity === 'common' ? 'Обычная' : 

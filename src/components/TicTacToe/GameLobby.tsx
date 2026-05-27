@@ -124,7 +124,7 @@ const GameLobby: React.FC = () => {
               <Button variant="outline" onClick={() => {
                 setShowCreateSelector(false);
                 setSelectedItemId(null);
-              }} className="bg-white/50 dark:bg-ocean-700/50 backdrop-blur-sm hover:bg-white/70 dark:hover:bg-ocean-600/70">
+              }} className="border-purple-600 bg-purple-900/40 hover:bg-purple-800/50 text-foreground">
                 Отмена
               </Button>
               <Button 
@@ -157,9 +157,9 @@ const GameLobby: React.FC = () => {
         )}
         
         {!hasItems && !showCreateSelector && (
-          <Alert className="mt-4 max-w-md mx-auto bg-amber-50 dark:bg-amber-950 border-amber-200 dark:border-amber-800">
-            <AlertCircle className="h-4 w-4 text-amber-500" />
-            <AlertDescription className="text-amber-700 dark:text-amber-300">
+          <Alert className="mt-4 max-w-md mx-auto bg-amber-900/30 border-amber-700/50">
+            <AlertCircle className="h-4 w-4 text-amber-400" />
+            <AlertDescription className="text-amber-300">
               У вас нет предметов в инвентаре. Пополните инвентарь, чтобы создать игру.
             </AlertDescription>
           </Alert>
@@ -207,7 +207,7 @@ const GameLobby: React.FC = () => {
                       <UnderwaterIcon emoji="🎮" className="mr-2" delay={Math.random()} />
                       Комната {room.roomCode}
                     </CardTitle>
-                    <Badge variant={room.status === "waiting" ? "outline" : "secondary"} className={room.status === "waiting" ? "bg-ocean-100 text-ocean-700 dark:bg-ocean-800 dark:text-ocean-100" : ""}>
+                    <Badge variant={room.status === "waiting" ? "outline" : "secondary"} className={room.status === "waiting" ? "bg-ocean-800/50 text-ocean-300 border-ocean-600" : ""}>
                       {room.status === "waiting" ? "Ожидание" : "Идет игра"}
                     </Badge>
                   </div>
@@ -219,7 +219,7 @@ const GameLobby: React.FC = () => {
                     <ul className="text-sm">
                       {room.players.map(player => (
                         <li key={player.id} className="flex items-center gap-2">
-                          <span className="w-6 h-6 flex items-center justify-center rounded-full bg-ocean-200 dark:bg-ocean-700 text-ocean-700 dark:text-ocean-200">
+                          <span className="w-6 h-6 flex items-center justify-center rounded-full bg-ocean-700 text-ocean-200">
                             {player.symbol}
                           </span>
                           <span>{player.username}</span>
@@ -244,7 +244,7 @@ const GameLobby: React.FC = () => {
                 </CardContent>
                 <CardFooter className="flex justify-end gap-2 pt-2">
                   {user?.role === "admin" && (
-                    <Button onClick={() => spectateRoom(room.id)} variant="outline" size="sm" className="bg-white/50 dark:bg-ocean-700/50 backdrop-blur-sm hover:bg-white/70 dark:hover:bg-ocean-600/70">
+                    <Button onClick={() => spectateRoom(room.id)} variant="outline" size="sm" className="border-purple-600 bg-purple-900/40 hover:bg-purple-800/50 text-foreground">
                       Наблюдать
                     </Button>
                   )}

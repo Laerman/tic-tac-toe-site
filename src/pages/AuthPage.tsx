@@ -43,7 +43,7 @@ export default function AuthPage() {
 
   if (auth.isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-lg">Загрузка...</div>
       </div>
     );
@@ -51,14 +51,14 @@ export default function AuthPage() {
 
   if (auth.isAuthenticated && auth.user && view === "profile") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50 p-4">
+      <div className="min-h-screen flex items-center justify-center p-4">
         <UserProfile user={auth.user} onLogout={handleLogout} className="w-full max-w-md" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50 p-4">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {view === "login" && (
           <LoginForm

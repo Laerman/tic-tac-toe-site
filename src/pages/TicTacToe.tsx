@@ -29,8 +29,8 @@ const TicTacToe: React.FC = () => {
         </Card>
       ) : (
         <>
-          <Alert className="mb-6 bg-amber-50 dark:bg-amber-950 border-amber-200 dark:border-amber-800">
-            <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+          <Alert className="mb-6 bg-amber-900/30 border-amber-700/50">
+            <AlertTriangle className="h-4 w-4 text-amber-400" />
             <AlertTitle className="flex items-center gap-2">
               Игра на ставку 
               <Flame className="h-4 w-4 text-red-500" />

@@ -8,7 +8,7 @@ interface SquareProps {
 const Square: React.FC<SquareProps> = ({ value, onClick }) => {
   return (
     <button
-      className="h-16 w-16 border border-gray-300 bg-white text-3xl font-bold text-center flex items-center justify-center hover:bg-gray-100 transition-colors"
+      className="h-16 w-16 border border-purple-700/50 bg-purple-950/60 text-3xl font-bold text-center flex items-center justify-center hover:bg-purple-800/50 transition-colors text-foreground"
       onClick={onClick}
     >
       {value}
