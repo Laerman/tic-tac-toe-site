@@ -20,7 +20,7 @@ import ImportProducts from "./pages/ImportProducts";
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="light" storageKey="theme">
+    <ThemeProvider defaultTheme="dark" storageKey="theme">
       <Header />
       <Toaster />
       <Routes>
