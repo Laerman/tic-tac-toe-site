@@ -63,40 +63,40 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				ocean: {
-					50: '#e6f7ff',
-					100: '#b3e6ff',
-					200: '#80d4ff',
-					300: '#4dc2ff',
-					400: '#26b1ff',
-					500: '#00a0ff',
-					600: '#0080cc',
-					700: '#006099',
-					800: '#004066',
-					900: '#002033',
+					50: '#faf5ff',
+					100: '#f3e8ff',
+					200: '#e9d5ff',
+					300: '#d8b4fe',
+					400: '#c084fc',
+					500: '#a855f7',
+					600: '#9333ea',
+					700: '#7e22ce',
+					800: '#6b21a8',
+					900: '#581c87',
 				},
 				coral: {
-					50: '#fff0eb',
-					100: '#ffd6c7',
-					200: '#ffbca3',
-					300: '#ffa27f',
-					400: '#ff895b',
-					500: '#ff6f37',
-					600: '#cc592c',
-					700: '#994321',
-					800: '#662c16',
-					900: '#33160b',
+					50: '#fdf2f8',
+					100: '#fce7f3',
+					200: '#fbcfe8',
+					300: '#f9a8d4',
+					400: '#f472b6',
+					500: '#ec4899',
+					600: '#db2777',
+					700: '#be185d',
+					800: '#9d174d',
+					900: '#831843',
 				},
 				seaweed: {
-					50: '#e6fff2',
-					100: '#b3ffdb',
-					200: '#80ffc4',
-					300: '#4dffad',
-					400: '#26ff9c',
-					500: '#00ff8a',
-					600: '#00cc6e',
-					700: '#009953',
-					800: '#006637',
-					900: '#00331c',
+					50: '#fff7ed',
+					100: '#ffedd5',
+					200: '#fed7aa',
+					300: '#fdba74',
+					400: '#fb923c',
+					500: '#f97316',
+					600: '#ea580c',
+					700: '#c2410c',
+					800: '#9a3412',
+					900: '#7c2d12',
 				}
 			},
 			borderRadius: {
@@ -126,6 +126,10 @@ export default {
 					'0%': { transform: 'translateX(0) translateY(0)' },
 					'50%': { transform: 'translateX(10px) translateY(-5px)' },
 					'100%': { transform: 'translateX(0) translateY(0)' }
+				},
+				'pulse-glow': {
+					'0%, 100%': { boxShadow: '0 0 20px rgba(168, 85, 247, 0.4)' },
+					'50%': { boxShadow: '0 0 40px rgba(236, 72, 153, 0.7)' }
 				}
 			},
 			animation: {
@@ -133,11 +137,12 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'float': 'float 6s ease-in-out infinite',
 				'bubble': 'bubble 8s ease-in-out infinite',
-				'wave': 'wave 8s ease-in-out infinite'
+				'wave': 'wave 8s ease-in-out infinite',
+				'pulse-glow': 'pulse-glow 3s ease-in-out infinite'
 			},
 			backgroundImage: {
-				'ocean-gradient': 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(200, 100%, 95%) 100%)',
-				'ocean-pattern': "url('/ocean-pattern.svg')"
+				'ocean-gradient': 'linear-gradient(135deg, hsl(270, 30%, 98%) 0%, hsl(300, 40%, 96%) 50%, hsl(25, 60%, 97%) 100%)',
+				'energy-gradient': 'linear-gradient(135deg, hsl(270, 80%, 55%) 0%, hsl(330, 85%, 60%) 50%, hsl(25, 95%, 55%) 100%)',
 			}
 		}
 	},
