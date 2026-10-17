@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import BubbleBackground from "@/components/BubbleBackground";
 import UnderwaterIcon from "@/components/UnderwaterIcon";
+import FishingGame from "@/components/FishingGame";
 import SimpleAuthForm from "@/components/Auth/SimpleAuthForm";
 
 const Index: React.FC = () => {
   const { isAuthenticated, user } = useAuth();
   const [showAuthForm, setShowAuthForm] = useState(false);
+  const [showFishing, setShowFishing] = useState(false);
 
   const handleAuthSuccess = (userData: any) => {
     setShowAuthForm(false);
@@ -22,6 +24,7 @@ const Index: React.FC = () => {
 
   return (
     <>
+      {showFishing && <FishingGame onClose={() => setShowFishing(false)} />}
       <div className="fixed inset-0 z-0">
         <img 
           src="https://cdn.poehali.dev/projects/17336903318390/bucket/anime-cat-bg.jpg"
@@ -32,7 +35,15 @@ const Index: React.FC = () => {
       <div className="container max-w-5xl py-16 text-center relative z-10">
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-2 flex items-center justify-center">
-            <UnderwaterIcon emoji="🐋" size="lg" delay={1} className="mr-4" />
+            <button
+              type="button"
+              onClick={() => setShowFishing(true)}
+              className="mr-4 cursor-pointer hover:scale-110 transition-transform"
+              aria-label="Рыбалка"
+              title="Нажми на кита!"
+            >
+              <UnderwaterIcon emoji="🐋" size="lg" delay={1} />
+            </button>
             <span className="wave-text">SVOIKIT</span>
             <UnderwaterIcon emoji="🎮" size="lg" delay={2} className="ml-4" />
           </h1>
